@@ -32,28 +32,56 @@ const outEl = document.querySelector("#output")
 
   // Array to contain all the Manufacturing businesses
       
-  outEl.innerHTML = "<h1>Manufacturing Businesses</h1>"
+//   outEl.innerHTML = "<h1>Manufacturing Businesses</h1>"
 
-  const manufacturingBusinesses = businesses.filter(business => {
-      let isManufacturing = false
+//   const manufacturingBusinesses = businesses.filter(business => {
+//       let isManufacturing = false
 
-      if (business.companyIndustry === "Manufacturing") {
-          isManufacturing = true
-      }
-      return isManufacturing
-  })
+//       if (business.companyIndustry === "Manufacturing") {
+//           isManufacturing = true
+//       }
+//       return isManufacturing
+//   })
 
 //   console.log(manufacturingBusinesses);
 
-manufacturingBusinesses.forEach(business => {
-    outEl.innerHTML += `
-      <h2>${business.companyName}</h2>
-      <section>
-        ${business.addressFullStreet}
-      </section>
-      <section>
-      ${business.addressCity}, ${business.addressStateCode} ${business.addressZipCode}
-      </section>
-    `
-    outEl.innerHTML += "<hr/>"
-  });
+// manufacturingBusinesses.forEach(business => {
+//     outEl.innerHTML += `
+//       <h2>${business.companyName}</h2>
+//       <section>
+//         ${business.addressFullStreet}
+//       </section>
+//       <section>
+//       ${business.addressCity}, ${business.addressStateCode} ${business.addressZipCode}
+//       </section>
+//     `
+//     outEl.innerHTML += "<hr/>"
+//   });
+
+// Array to contain all the Purchasing Agents
+
+outEl.innerHTML += "<h1>Purchasing Agents</h1>";
+
+/*
+    Using map(), you extract the purchasing agent object
+    from each business and store it in a new array
+*/
+const agents = businesses.map(business => {
+    return {
+        "firstName": business.purchasingAgent.nameFirst,
+        "lastName": business.purchasingAgent.nameLast,
+        "company": business.companyName,
+        "phoneNumber": business.phoneWork
+    }
+})
+
+console.table(agents)
+
+agents.forEach(agent => {
+  outEl.innerHTML += 
+  `<h2>${agent.firstName} ${agent.lastName}</h2>
+  <p>${agent.company}</p>
+  <p>${agent.phoneNumber}</p>`;
+  outEl.innerHTML += "<hr/>";
+});
+
